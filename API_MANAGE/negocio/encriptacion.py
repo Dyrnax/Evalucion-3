@@ -1,8 +1,9 @@
-import hashlib
+import bcrypt
 
+def encriptar(contraseña):
 
-def encriptar(texto):
-    return hashlib.sha256(texto.encode()).hexdigest()
+    return bcrypt.hashpw(contraseña.encode(), bcrypt.gensalt()).decode()
 
-def desencriptar(encriptado, original):
-    return encriptar(original)
+def verificar_contraseña(contraseña_ingresada, contraseña_guardada):
+
+    return bcrypt.checkpw(contraseña_ingresada.encode(), contraseña_guardada.encode())
